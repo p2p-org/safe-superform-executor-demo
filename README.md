@@ -3,10 +3,9 @@
 Small, real-mainnet demo that drives `@p2p-org/safe-superform-executor` on Base:
 
 - Builds a P2P signer signature
-- Sends a deposit through the Roles module into the Safe
-- Sends a withdraw through the Roles module
-
-The script uses the hardcoded Safe/Role/Proxy addresses already in `deposit-withdraw.ts` and the current Superform calldata blobs. Update those constants if you want to target other vaults or Safes.
+- Uses the Superform API (via SDK) to deposit into the Safe’s P2pSuperformProxy
+- Uses the Superform API to withdraw
+- Optionally batch-claims rewards if available
 
 ## Prerequisites
 
@@ -18,6 +17,9 @@ The script uses the hardcoded Safe/Role/Proxy addresses already in `deposit-with
 RPC_URL=https://mainnet.base.org        # HTTPS RPC endpoint
 PRIVATE_KEY=0x...                       # P2P module wallet (matches Roles permission)
 P2P_SIGNER_PRIVATE_KEY=0x...            # Key used to sign the fee config (p2p signer)
+SF_API_KEY=...                          # Superform API key
+DEPOSIT_AMOUNT=0.005                    # optional override
+WITHDRAW_SUPERPOSITIONS_AMOUNT_IN=4477  # optional override
 ```
 
 ## Install
@@ -26,16 +28,12 @@ P2P_SIGNER_PRIVATE_KEY=0x...            # Key used to sign the fee config (p2p s
 npm install
 ```
 
-## Run
+## Run individual steps
 
 ```bash
-npm run demo
+npm run deposit
+npm run withdraw
+npm run claim   # will skip if no rewards are claimable
 ```
 
-What happens:
-
-1. A P2P signer signature is generated with a 1-week deadline.
-2. `executor.deposit` is called with the fixed Safe, Roles, and yield protocol calldata.
-3. `executor.withdraw` is called with the fixed Safe, Roles, proxy address, and Superform calldata.
-
-Both transactions are broadcast to Base mainnet. If Roles does not allow the withdraw selector for the proxy, the second call will fail on-chain. Adjust the calldata or permissions as needed before running with real funds.
+Constants for Safe/Role/Proxy/Vault are in `shared.ts`. Update them if you want to target other vaults or Safes. All Superform calldata is fetched automatically via the SDK.

@@ -4,10 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "demo": "tsx deposit-withdraw.ts"
+    "deposit": "tsx deposit.ts",
+    "withdraw": "tsx withdraw.ts",
+    "claim": "tsx claim.ts",
+    "demo": "npm run deposit && npm run withdraw && npm run claim"
   },
   "dependencies": {
-    "@p2p-org/safe-superform-executor": "0.1.1",
+    "@p2p-org/safe-superform-executor": "0.2.2",
     "dotenv": "^16.4.5",
     "viem": "^2.9.8"
   },
