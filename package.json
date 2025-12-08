@@ -10,7 +10,7 @@
     "demo": "npm run deposit && npm run withdraw && npm run claim"
   },
   "dependencies": {
-    "@p2p-org/safe-superform-executor": "file:../p2p-safe-superform-executor",
+    "@p2p-org/safe-superform-executor": "0.2.2",
     "dotenv": "^16.4.5",
     "viem": "^2.9.8"
   },
