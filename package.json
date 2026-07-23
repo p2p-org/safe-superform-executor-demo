@@ -12,7 +12,7 @@
   "dependencies": {
     "@p2p-org/safe-superform-executor": "0.2.2",
     "dotenv": "^16.4.5",
-    "viem": "^2.9.8"
+    "viem": "^2.51.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
